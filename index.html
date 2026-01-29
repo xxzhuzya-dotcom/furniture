@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aesthetic Furniture - Эксклюзивная дизайнерская мебель ручной работы в Алматы.">
+    <meta name="description" content="Aesthetic Furniture - Эксклюзивная дизайнерская мебель в Алматы.">
     <title>Aesthetic Furniture | Timeless Design</title>
     
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -32,10 +32,8 @@
 
         /* --- PRELOADER --- */
         #preloader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color);
-            z-index: 10000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color); z-index: 10000;
             display: flex; justify-content: center; align-items: center;
             transition: opacity 1s ease, visibility 1s ease;
         }
@@ -61,57 +59,28 @@
             width: 60px; height: 60px;
             background-color: rgba(166, 138, 86, 0.1); border-color: var(--text-gold);
         }
-        @media (hover: none) { .cursor-dot, .cursor-outline { display: none; } }
 
-        /* --- HERO SECTION (VIDEO) --- */
+        /* --- HERO SECTION --- */
         .hero {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding: 20px;
+            position: relative; height: 100vh; width: 100%;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; color: var(--white);
             overflow: hidden;
         }
-
-        /* Видео фон */
         .hero-video {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; object-fit: cover; z-index: 1;
         }
-
-        /* Затемняющий слой поверх видео */
         .hero-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.35); /* Степень затемнения */
-            z-index: 2;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2;
         }
-
-        /* Контент поверх видео */
-        .hero-content {
-            position: relative;
-            z-index: 3;
-        }
-
+        .hero-content { position: relative; z-index: 3; padding: 20px; }
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 9vw, 6rem);
-            font-weight: 400;
-            margin-bottom: 30px;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            animation: fadeInUp 1.5s ease-out;
+            font-family: 'Playfair Display', serif; font-size: clamp(3rem, 9vw, 6rem);
+            font-weight: 400; margin-bottom: 30px; letter-spacing: 6px;
+            text-transform: uppercase; animation: fadeInUp 1.5s ease-out;
         }
-        
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         .btn-tg {
@@ -128,34 +97,28 @@
         .section-title { font-family: 'Playfair Display', serif; text-align: center; font-size: 2.5rem; margin-bottom: 80px; letter-spacing: 2px; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px 40px; }
         .card { text-align: center; position: relative; }
-        
         .img-container { 
             width: 100%; aspect-ratio: 3/4; overflow: hidden; margin-bottom: 25px; 
-            background: #eee; position: relative; cursor: none;
+            background: #eee; position: relative;
         }
-        .img-container img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: var(--transition); display: block;
-        }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
         .card:hover .img-container img { transform: scale(1.1); }
         
         .badge {
             position: absolute; top: 20px; left: 20px;
             background: rgba(255,255,255, 0.9); padding: 8px 15px;
             font-family: 'Playfair Display', serif; font-style: italic;
-            font-size: 0.9rem; color: #888; z-index: 2; text-transform: lowercase;
+            font-size: 0.9rem; color: #888; z-index: 2;
         }
-        .card.sold-out .price { text-decoration: line-through; color: #ccc; }
-        .card.sold-out .btn-order { pointer-events: none; border-color: transparent; color: #ccc; }
-        .card.sold-out img { filter: grayscale(1); opacity: 0.8; }
+        .card.sold-out img { filter: grayscale(1); opacity: 0.7; }
+        .card.sold-out .btn-order { pointer-events: none; opacity: 0.3; }
 
-        .card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 8px; font-weight: 400; letter-spacing: 1px; }
+        .card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 8px; font-weight: 400; }
         .price { display: block; font-size: 1rem; color: var(--text-gold); margin-bottom: 20px; }
         .btn-order { 
             text-decoration: none; color: var(--accent-dark); 
             border-bottom: 1px solid var(--accent-dark); padding-bottom: 4px; 
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; 
-            transition: var(--transition); 
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition);
         }
         .btn-order:hover { color: var(--text-gold); border-color: var(--text-gold); }
 
@@ -166,25 +129,22 @@
             opacity: 0; transition: opacity 0.3s ease;
         }
         #lightbox.active { display: flex; opacity: 1; }
-        #lightbox img { max-height: 90vh; max-width: 90vw; border: 2px solid var(--white); }
-        #lightbox-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2rem; cursor: pointer; }
+        #lightbox img { max-height: 85vh; max-width: 90vw; border: 1px solid var(--white); }
+        #lightbox-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2.5rem; }
 
-        /* --- LOCATION & FOOTER --- */
+        /* --- LOCATION --- */
         .location-section { background: var(--white); padding: 100px 0; text-align: center; }
-        .map-container {
-            max-width: 1000px; margin: 50px auto 0; height: 450px;
-            filter: grayscale(1) contrast(1.1); border: 1px solid #eee;
-        }
+        .map-container { max-width: 1000px; margin: 50px auto 0; height: 400px; filter: grayscale(1); border: 1px solid #eee; }
         iframe { width: 100%; height: 100%; border: none; }
+
         #back-to-top {
             display: none; position: fixed; bottom: 30px; right: 30px;
             background: var(--accent-dark); color: var(--white);
-            border: none; padding: 15px 20px; z-index: 999; transition: var(--transition);
+            border: none; padding: 15px 20px; z-index: 999;
         }
-        #back-to-top:hover { background: var(--text-gold); }
 
         @media (max-width: 992px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.2rem; } }
+        @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
@@ -194,16 +154,16 @@
     <div class="cursor-outline" data-cursor-outline></div>
 
     <div id="lightbox">
-        <span id="lightbox-close">×</span>
-        <img id="lightbox-img" src="" alt="Zoomed">
+        <span id="lightbox-close" class="hover-target">×</span>
+        <img id="lightbox-img" src="">
     </div>
 
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
-            <source src="images/video1.mov" type="video/mp4">
-            <source src="images/video1.mov" type="video/quicktime">
+            <source src="images/video1.mp4" type="video/mp4">
         </video>
-        <div class="hero-overlay"></div> <div class="hero-content">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
             <h1>Timeless Design</h1>
             <a href="https://t.me/ВАШ_НИК" class="btn-tg hover-target" target="_blank">Написать в Telegram</a>
         </div>
@@ -213,57 +173,48 @@
         <h2 class="section-title">Objects</h2>
         <div class="grid">
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image1.jpg')"><img src="images/image1.jpg" alt="Muna" loading="lazy"></div>
-                <h3>Muna</h3>
-                <span class="price">185 000 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image1.jpg')"><img src="images/image1.jpg" alt="Muna"></div>
+                <h3>Muna</h3><span class="price">185 000 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
             <div class="card hover-target sold-out">
-                <div class="img-container" onclick="openLightbox('images/image2.jpg')"><div class="badge">Sold Out</div><img src="images/image2.jpg" alt="Solis" loading="lazy"></div>
-                <h3>Solis</h3>
-                <span class="price">210 000 ₸</span>
-                <a class="btn-order">В архиве</a>
+                <div class="img-container" onclick="openLightbox('images/image2.jpg')"><div class="badge">Sold Out</div><img src="images/image2.jpg" alt="Solis"></div>
+                <h3>Solis</h3><span class="price">210 000 ₸</span>
+                <a class="btn-order">Архив</a>
             </div>
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image3.jpg')"><img src="images/image3.jpg" alt="Aura" loading="lazy"></div>
-                <h3>Aura</h3>
-                <span class="price">65 000 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image3.jpg')"><img src="images/image3.jpg" alt="Aura"></div>
+                <h3>Aura</h3><span class="price">65 000 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image4.jpg')"><img src="images/image4.jpg" alt="Veda" loading="lazy"></div>
-                <h3>Veda</h3>
-                <span class="price">42 000 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image4.jpg')"><img src="images/image4.jpg" alt="Veda"></div>
+                <h3>Veda</h3><span class="price">42 000 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image5.jpg')"><img src="images/image5.jpg" alt="Luma" loading="lazy"></div>
-                <h3>Luma</h3>
-                <span class="price">28 500 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image5.jpg')"><img src="images/image5.jpg" alt="Luma"></div>
+                <h3>Luma</h3><span class="price">28 500 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image6.jpg')"><img src="images/image6.jpg" alt="Nura" loading="lazy"></div>
-                <h3>Nura</h3>
-                <span class="price">94 000 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image6.jpg')"><img src="images/image6.jpg" alt="Nura"></div>
+                <h3>Nura</h3><span class="price">94 000 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
             <div class="card hover-target sold-out">
-                <div class="img-container" onclick="openLightbox('images/image7.jpg')"><div class="badge">Out of Stock</div><img src="images/image7.jpg" alt="Eos" loading="lazy"></div>
-                <h3>Eos</h3>
-                <span class="price">15 000 ₸</span>
-                <a class="btn-order">Лист ожидания</a>
+                <div class="img-container" onclick="openLightbox('images/image7.jpg')"><div class="badge">Sold Out</div><img src="images/image7.jpg" alt="Eos"></div>
+                <h3>Eos</h3><span class="price">15 000 ₸</span>
+                <a class="btn-order">Архив</a>
             </div>
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image8.jpg')"><img src="images/image8.jpg" alt="Koto" loading="lazy"></div>
-                <h3>Koto</h3>
-                <span class="price">37 000 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image8.jpg')"><img src="images/image8.jpg" alt="Koto"></div>
+                <h3>Koto</h3><span class="price">37 000 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
             <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image9.jpg')"><img src="images/image9.jpg" alt="Mira" loading="lazy"></div>
-                <h3>Mira</h3>
-                <span class="price">19 000 ₸</span>
+                <div class="img-container" onclick="openLightbox('images/image9.jpg')"><img src="images/image9.jpg" alt="Mira"></div>
+                <h3>Mira</h3><span class="price">19 000 ₸</span>
                 <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
             </div>
         </div>
@@ -271,46 +222,41 @@
 
     <section class="location-section">
         <h2 class="section-title">Atelier</h2>
-        <p>г. Алматы, ул. Абая, 150</p>
-        <p>11:00 — 20:00</p>
+        <p>г. Алматы, пр. Абая, 150</p>
         <div class="map-container hover-target">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.746014382583!2d76.9097!3d43.2389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzIwLjAiTiA3NsKwNTQnMzUuMCJF!5e0!3m2!1sru!2skz!4v1600000000000!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.7760742116035!2d76.9038237!3d43.2351474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836ec78994784b%3A0xc3f173b063765e9!2z0L_RgNC-0YHQvy4g0JDQsdCw0Y8gMTUwLCDQkNC70LzQsNGC0YsgMDUwMDAw!5e0!3m2!1sru!2skz!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 60px; font-size: 0.7rem; color: #aaa; letter-spacing: 2px;">
-        © 2026 AESTHETIC FURNITURE.
-    </footer>
+    <footer style="text-align: center; padding: 60px; font-size: 0.7rem; color: #aaa; letter-spacing: 2px;">© 2026 AESTHETIC FURNITURE.</footer>
 
     <button onclick="window.scrollTo(0,0)" id="back-to-top" class="hover-target">↑</button>
 
     <script>
-        window.addEventListener("load", function() {
-            const preloader = document.getElementById("preloader");
-            setTimeout(() => { preloader.classList.add("loaded"); setTimeout(() => preloader.style.display = "none", 1000); }, 1000);
+        window.addEventListener("load", () => {
+            const p = document.getElementById("preloader");
+            setTimeout(() => { p.classList.add("loaded"); setTimeout(() => p.style.display="none", 1000); }, 1000);
         });
 
-        const cursorDot = document.querySelector('[data-cursor-dot]');
-        const cursorOutline = document.querySelector('[data-cursor-outline]');
-        const hoverTargets = document.querySelectorAll('.hover-target, a, button, .img-container');
-
-        window.addEventListener('mousemove', function(e) {
-            const posX = e.clientX; const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        const dot = document.querySelector('[data-cursor-dot]');
+        const out = document.querySelector('[data-cursor-outline]');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = out.style.left = `${e.clientX}px`;
+            dot.style.top = out.style.top = `${e.clientY}px`;
+            out.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
         });
-        hoverTargets.forEach(el => {
+
+        document.querySelectorAll('.hover-target, a, button').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered'));
         });
 
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        function openLightbox(src) { lightboxImg.src = src; lightbox.classList.add('active'); }
-        lightbox.addEventListener('click', (e) => { if (e.target !== lightboxImg) { lightbox.classList.remove('active'); } });
+        const lb = document.getElementById('lightbox'), lbi = document.getElementById('lightbox-img');
+        function openLightbox(s) { lbi.src = s; lb.classList.add('active'); }
+        lb.onclick = (e) => { if(e.target !== lbi) lb.classList.remove('active'); };
 
-        let btn = document.getElementById("back-to-top");
-        window.onscroll = function() { btn.style.display = (window.scrollY > 300) ? "block" : "none"; };
+        let b = document.getElementById("back-to-top");
+        window.onscroll = () => { b.style.display = (window.scrollY > 400) ? "block" : "none"; };
     </script>
 </body>
 </html>
