@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Furniture | Timeless Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f9f7f2;
+            --accent-dark: #2c2c2c;
+            --text-gold: #a68a56;
+            --white: #ffffff;
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--accent-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/phone1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+
+        .btn-tg {
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--white);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .btn-tg:hover {
+            background: var(--white);
+            color: var(--accent-dark);
+        }
+
+        /* --- CATALOG SECTION --- */
+        .container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            padding-bottom: 25px;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover img {
+            scale: 1.05;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            color: var(--text-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .btn-order {
+            text-decoration: none;
+            color: var(--accent-dark);
+            border-bottom: 1px solid var(--accent-dark);
+            padding-bottom: 2px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-order:hover {
+            color: var(--text-gold);
+            border-color: var(--text-gold);
+        }
+
+        /* --- INFO SECTION --- */
+        .info {
+            background: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .info p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* --- ADAPTIVE --- */
+        @media (max-width: 992px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>Timeless Design</h1>
+        <a href="https://t.me/ВАШ_НИК_ТГ" class="btn-tg" target="_blank">Связаться в Telegram</a>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Collection</h2>
+        <div class="grid">
+            <script>
+                // Автоматическая генерация 9 карточек для краткости кода
+                for(let i=1; i<=9; i++) {
+                    document.write(`
+                        <div class="card">
+                            <div class="img-container">
+                                <img src="images/image${i}.jpg" alt="Furniture ${i}">
+                            </div>
+                            <h3>Aesthetic Object №${i}</h3>
+                            <span class="price">145 000 ₸</span>
+                            <a href="https://t.me/ВАШ_НИК_ТГ" class="btn-order">Заказать</a>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+    </div>
+
+    <section class="info">
+        <h2 class="section-title">Showroom</h2>
+        <p>Казахстан, г. Алматы, пр. Аль-Фараби, 77/7</p>
+        <p>Пн — Вс: 10:00 - 20:00</p>
+        <a href="https://www.google.com/maps" target="_blank" style="color: var(--accent-dark); text-decoration: underline;">Открыть на карте</a>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; font-size: 0.7rem; color: #999; letter-spacing: 2px;">
+        &copy; 2026 AESTHETIC FURNITURE. ALL RIGHTS RESERVED.
+    </footer>
+
+</body>
+</html>
