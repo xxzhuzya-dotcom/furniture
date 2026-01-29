@@ -1,162 +1,565 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aesthetic Furniture - Эксклюзивная дизайнерская мебель в Алматы.">
-    <title>Aesthetic Furniture | Timeless Design</title>
+    <meta name="description" content="Aesthetic Furniture - Curated design objects, handcrafted for timeless living.">
+    <meta name="keywords" content="furniture, design, almaty, wood, decor, luxury, minimalist">
+    <title>Aesthetic Furniture | The Ultimate Collection</title>
     
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        /* ========================================
+        1. RESET & VARIABLES
+        ========================================
+        */
         :root {
-            --bg-color: #f9f7f2;
-            --accent-dark: #2c2c2c;
-            --text-gold: #a68a56;
+            /* Colors */
+            --bg-color: #f5f2eb;
+            --bg-secondary: #e8e4dc;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --accent-gold: #bfa47d;
+            --accent-rust: #8c5e4d;
             --white: #ffffff;
-            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --black: #000000;
+            --border-light: rgba(0,0,0,0.08);
+            
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            
+            /* Spacing */
+            --container-width: 1400px;
+            --section-padding: 120px;
+            
+            /* Transitions */
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+            --duration: 0.6s;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            cursor: none; /* Custom cursor everywhere */
+        }
+
         @media (hover: none) { * { cursor: auto !important; } }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--font-sans);
             background-color: var(--bg-color);
-            color: var(--accent-dark);
-            line-height: 1.6;
+            color: var(--text-main);
+            line-height: 1.7;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color); z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
-        .loader-text {
-            font-family: 'Playfair Display', serif; font-size: 2rem;
-            letter-spacing: 5px; animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-        .loaded { opacity: 0; visibility: hidden; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        ul { list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        button, input, textarea { border: none; outline: none; background: none; font-family: inherit; }
 
-        /* --- CUSTOM CURSOR --- */
-        .cursor-dot, .cursor-outline {
-            position: fixed; top: 0; left: 0;
-            transform: translate(-50%, -50%); border-radius: 50%;
-            z-index: 9999; pointer-events: none;
-        }
-        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent-dark); }
-        .cursor-outline {
-            width: 40px; height: 40px; border: 1px solid rgba(44, 44, 44, 0.5);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        body.hovered .cursor-outline {
-            width: 60px; height: 60px;
-            background-color: rgba(166, 138, 86, 0.1); border-color: var(--text-gold);
+        /* ========================================
+        2. UI COMPONENTS & UTILITIES
+        ========================================
+        */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            position: relative; height: 100vh; width: 100%;
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; color: var(--white);
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--text-main);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            position: relative;
             overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s var(--ease-out);
         }
-        .hero-video {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; object-fit: cover; z-index: 1;
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--text-main);
+            z-index: -1;
+            transition: width 0.4s var(--ease-out);
+        }
+
+        .btn-primary:hover { color: var(--white); }
+        .btn-primary:hover::before { width: 100%; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gold); }
+
+        /* ========================================
+        3. CUSTOM CURSOR
+        ========================================
+        */
+        .cursor-dot {
+            position: fixed; top: 0; left: 0; width: 6px; height: 6px;
+            background: var(--text-main); border-radius: 50%;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+        }
+        .cursor-circle {
+            position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+            border: 1px solid rgba(0,0,0,0.3); border-radius: 50%;
+            pointer-events: none; z-index: 9998; transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+        }
+        body.hovered .cursor-circle {
+            width: 70px; height: 70px;
+            background: rgba(191, 164, 125, 0.1);
+            border-color: var(--accent-gold);
+        }
+
+        /* ========================================
+        4. PRELOADER
+        ========================================
+        */
+        #preloader {
+            position: fixed; inset: 0;
+            background: var(--bg-color);
+            z-index: 10000;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+        }
+        .loading-line {
+            width: 0%; height: 2px; background: var(--text-main);
+            margin-top: 20px; transition: width 0.5s ease;
+        }
+        .brand-name-load {
+            font-family: var(--font-serif);
+            font-size: 2.5rem; letter-spacing: 5px;
+            animation: fadeIn 1.5s ease infinite alternate;
+        }
+
+        /* ========================================
+        5. HEADER & NAV
+        ========================================
+        */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 30px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+            transition: background 0.3s ease, padding 0.3s ease;
+            mix-blend-mode: difference;
+            color: #fff; /* Invert colors for visibility */
+        }
+        header.scrolled {
+            background: rgba(245, 242, 235, 0.95);
+            padding: 20px 50px;
+            mix-blend-mode: normal;
+            color: var(--text-main);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex; gap: 40px;
+        }
+        .nav-links li a {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+            position: relative;
+        }
+        .nav-links li a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0%; height: 1px; background: currentColor;
+            transition: width 0.3s ease;
+        }
+        .nav-links li a:hover::after { width: 100%; }
+
+        .header-icons { display: flex; gap: 25px; align-items: center; }
+        .icon-btn { font-size: 1.2rem; cursor: pointer; }
+        .cart-count { font-size: 0.7rem; vertical-align: super; }
+
+        /* Burger Menu (Mobile) */
+        .burger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+        .burger span { width: 25px; height: 2px; background: currentColor; }
+
+        /* ========================================
+        6. HERO SECTION
+        ========================================
+        */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
         }
         .hero-overlay {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2;
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.3);
         }
-        .hero-content { position: relative; z-index: 3; padding: 20px; }
-        .hero h1 {
-            font-family: 'Playfair Display', serif; font-size: clamp(3rem, 9vw, 6rem);
-            font-weight: 400; margin-bottom: 30px; letter-spacing: 6px;
-            text-transform: uppercase; animation: fadeInUp 1.5s ease-out;
+        .hero-content {
+            position: relative; z-index: 2;
+            text-align: center; color: var(--white);
+            max-width: 800px;
+            padding: 20px;
         }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 1; margin-bottom: 30px;
+            opacity: 0; transform: translateY(50px);
+            animation: slideUp 1s var(--ease-out) 0.5s forwards;
+        }
+        .hero-content p {
+            font-size: 1.1rem; margin-bottom: 40px;
+            opacity: 0; animation: slideUp 1s var(--ease-out) 0.8s forwards;
+        }
 
-        .btn-tg {
-            display: inline-block; padding: 20px 50px;
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            border: 1px solid var(--white); color: var(--white);
-            text-decoration: none; text-transform: uppercase;
-            letter-spacing: 3px; font-size: 0.7rem; transition: var(--transition);
-        }
-        .btn-tg:hover { background: var(--white); color: var(--accent-dark); }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- CATALOG --- */
-        .container { max-width: 1200px; margin: 100px auto; padding: 0 25px; }
-        .section-title { font-family: 'Playfair Display', serif; text-align: center; font-size: 2.5rem; margin-bottom: 80px; letter-spacing: 2px; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px 40px; }
-        .card { text-align: center; position: relative; }
-        .img-container { 
-            width: 100%; aspect-ratio: 3/4; overflow: hidden; margin-bottom: 25px; 
-            background: #eee; position: relative;
+        /* ========================================
+        7. MARQUEE (RUNNING LINE)
+        ========================================
+        */
+        .marquee {
+            background: var(--text-main); color: var(--white);
+            padding: 15px 0; overflow: hidden; white-space: nowrap;
         }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .card:hover .img-container img { transform: scale(1.1); }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        .marquee span {
+            display: inline-block;
+            padding-right: 50px;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+        }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* ========================================
+        8. PHILOSOPHY SECTION
+        ========================================
+        */
+        .philosophy { padding: var(--section-padding) 0; }
+        .philo-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .philo-text h2 {
+            font-family: var(--font-serif); font-size: 3.5rem; line-height: 1.1; margin-bottom: 30px;
+        }
+        .philo-text p {
+            color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem;
+        }
+        .philo-img {
+            position: relative; height: 600px; overflow: hidden;
+        }
+        .philo-img img {
+            width: 100%; height: 120%; object-fit: cover;
+            transform: translateY(-10%); /* For Parallax JS */
+            transition: transform 0.1s linear;
+        }
+
+        /* ========================================
+        9. CATALOG & FILTERS
+        ========================================
+        */
+        .catalog { padding: var(--section-padding) 0; background: var(--bg-secondary); }
         
-        .badge {
-            position: absolute; top: 20px; left: 20px;
-            background: rgba(255,255,255, 0.9); padding: 8px 15px;
-            font-family: 'Playfair Display', serif; font-style: italic;
-            font-size: 0.9rem; color: #888; z-index: 2;
+        .filters {
+            display: flex; justify-content: center; gap: 30px;
+            margin-bottom: 60px;
         }
-        .card.sold-out img { filter: grayscale(1); opacity: 0.7; }
-        .card.sold-out .btn-order { pointer-events: none; opacity: 0.3; }
-
-        .card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 8px; font-weight: 400; }
-        .price { display: block; font-size: 1rem; color: var(--text-gold); margin-bottom: 20px; }
-        .btn-order { 
-            text-decoration: none; color: var(--accent-dark); 
-            border-bottom: 1px solid var(--accent-dark); padding-bottom: 4px; 
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition);
+        .filter-btn {
+            font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--text-muted);
+            padding-bottom: 5px; border-bottom: 1px solid transparent;
+            transition: all 0.3s;
         }
-        .btn-order:hover { color: var(--text-gold); border-color: var(--text-gold); }
-
-        /* --- LIGHTBOX --- */
-        #lightbox {
-            position: fixed; z-index: 10001; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        #lightbox.active { display: flex; opacity: 1; }
-        #lightbox img { max-height: 85vh; max-width: 90vw; border: 1px solid var(--white); }
-        #lightbox-close { position: absolute; top: 30px; right: 30px; color: white; font-size: 2.5rem; }
-
-        /* --- LOCATION --- */
-        .location-section { background: var(--white); padding: 100px 0; text-align: center; }
-        .map-container { max-width: 1000px; margin: 50px auto 0; height: 400px; filter: grayscale(1); border: 1px solid #eee; }
-        iframe { width: 100%; height: 100%; border: none; }
-
-        #back-to-top {
-            display: none; position: fixed; bottom: 30px; right: 30px;
-            background: var(--accent-dark); color: var(--white);
-            border: none; padding: 15px 20px; z-index: 999;
+        .filter-btn:hover, .filter-btn.active {
+            color: var(--text-main); border-color: var(--text-main);
         }
 
-        @media (max-width: 992px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 650px) { .grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
+        .product-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .product-card {
+            background: var(--bg-color); padding: 20px;
+            transition: transform 0.4s ease;
+            opacity: 1; transform: scale(1);
+        }
+        .product-card.hidden { display: none; }
+        
+        .p-image {
+            width: 100%; aspect-ratio: 4/5; overflow: hidden;
+            margin-bottom: 20px; position: relative;
+        }
+        .p-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .product-card:hover .p-image img { transform: scale(1.1); }
+        
+        /* Quick Add Button */
+        .quick-add {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: var(--white); color: var(--text-main);
+            padding: 15px; text-align: center; text-transform: uppercase;
+            font-size: 0.8rem; letter-spacing: 1px;
+            transform: translateY(100%); transition: transform 0.4s ease;
+        }
+        .product-card:hover .quick-add { transform: translateY(0); }
+
+        .p-info { display: flex; justify-content: space-between; align-items: baseline; }
+        .p-info h3 { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; }
+        .p-price { color: var(--accent-gold); font-weight: 500; }
+
+        /* ========================================
+        10. MATERIALS (DETAILS)
+        ========================================
+        */
+        .materials { padding: var(--section-padding) 0; }
+        .mat-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+        }
+        .mat-item {
+            text-align: center; padding: 40px 20px; border: 1px solid var(--border-light);
+            transition: border-color 0.3s;
+        }
+        .mat-item:hover { border-color: var(--accent-gold); }
+        .mat-icon { font-size: 2rem; margin-bottom: 20px; display: block; }
+        .mat-item h4 { font-family: var(--font-serif); margin-bottom: 10px; font-size: 1.3rem; }
+        .mat-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* ========================================
+        11. JOURNAL / BLOG
+        ========================================
+        */
+        .journal { padding: var(--section-padding) 0; background: var(--white); }
+        .journal-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+        }
+        .article { cursor: pointer; }
+        .art-img {
+            width: 100%; height: 300px; background: #ddd; margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .art-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .article:hover img { transform: scale(1.05); }
+        .art-date { font-size: 0.8rem; color: var(--accent-gold); text-transform: uppercase; }
+        .art-title { font-family: var(--font-serif); font-size: 1.8rem; margin: 10px 0; line-height: 1.2; }
+        .read-more { font-size: 0.8rem; text-decoration: underline; text-underline-offset: 4px; }
+
+        /* ========================================
+        12. FAQ & NEWSLETTER
+        ========================================
+        */
+        .faq-section { padding: 80px 0; max-width: 800px; margin: 0 auto; }
+        .accordion-item { border-bottom: 1px solid var(--border-light); }
+        .accordion-header {
+            width: 100%; padding: 25px 0; text-align: left;
+            font-size: 1.2rem; font-family: var(--font-serif);
+            display: flex; justify-content: space-between;
+        }
+        .accordion-body {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+            color: var(--text-muted); padding-right: 50px;
+        }
+        .accordion-item.active .accordion-body { max-height: 200px; padding-bottom: 25px; }
+        
+        .newsletter {
+            background: var(--text-main); color: var(--white);
+            padding: 100px 0; text-align: center;
+        }
+        .newsletter h2 { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 20px; color: var(--white); }
+        .news-form {
+            display: flex; justify-content: center; max-width: 500px; margin: 40px auto 0;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+        .news-form input {
+            width: 100%; padding: 15px; color: var(--white);
+        }
+        .news-form button {
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
+            color: var(--white); padding: 0 20px;
+        }
+
+        /* ========================================
+        13. FOOTER
+        ========================================
+        */
+        footer {
+            background: #111; color: #888; padding: 80px 0 30px;
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px; border-bottom: 1px solid #333; padding-bottom: 60px;
+        }
+        .footer-brand h3 { color: #fff; font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 20px; }
+        .footer-col h4 { color: #fff; text-transform: uppercase; margin-bottom: 25px; font-size: 0.8rem; letter-spacing: 2px; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a:hover { color: #fff; }
+        .footer-bottom {
+            padding-top: 30px; display: flex; justify-content: space-between;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* ========================================
+        14. SIDEBARS (CART & SEARCH)
+        ========================================
+        */
+        .sidebar-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            z-index: 900; opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        .sidebar-overlay.active { opacity: 1; pointer-events: all; }
+
+        .cart-drawer, .search-drawer {
+            position: fixed; top: 0; right: 0; height: 100%;
+            width: 450px; background: var(--bg-color);
+            z-index: 950; transform: translateX(100%);
+            transition: transform 0.5s var(--ease-out);
+            padding: 40px; display: flex; flex-direction: column;
+        }
+        .cart-drawer.open, .search-drawer.open { transform: translateX(0); }
+        
+        .drawer-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 40px; border-bottom: 1px solid var(--border-light);
+            padding-bottom: 20px;
+        }
+        .drawer-header h2 { font-family: var(--font-serif); font-size: 2rem; }
+        .close-drawer { font-size: 1.5rem; cursor: pointer; }
+        
+        .empty-state { text-align: center; color: var(--text-muted); margin-top: 50px; }
+        
+        /* Search Input */
+        .search-input {
+            width: 100%; font-size: 2rem; font-family: var(--font-serif);
+            border-bottom: 1px solid var(--text-main); padding: 10px 0;
+            color: var(--text-main);
+        }
+
+        /* ========================================
+        15. RESPONSIVE
+        ========================================
+        */
+        @media (max-width: 1024px) {
+            .philo-grid { grid-template-columns: 1fr; }
+            .philo-img { order: -1; height: 400px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .journal-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Hide desktop menu */
+            .burger { display: flex; } /* Show burger */
+            .section-title { font-size: 2.5rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .mat-grid { grid-template-columns: 1fr 1fr; }
+            .journal-grid { grid-template-columns: 1fr; }
+            .cart-drawer, .search-drawer { width: 100%; }
+            .hero-content h1 { font-size: 3.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="preloader"><div class="loader-text">Aesthetic Furniture</div></div>
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
-
-    <div id="lightbox">
-        <span id="lightbox-close" class="hover-target">×</span>
-        <img id="lightbox-img" src="">
+    <div id="preloader">
+        <div class="loader-text brand-name-load">AESTHETIC</div>
+        <div class="loading-line"></div>
     </div>
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <div class="sidebar-overlay" id="overlay"></div>
+
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h2>Your Cart</h2>
+            <span class="close-drawer hover-target">&times;</span>
+        </div>
+        <div class="cart-body">
+            <p class="empty-state">Your shopping bag is empty.</p>
+            </div>
+    </aside>
+
+    <aside class="search-drawer" id="search-drawer">
+        <div class="drawer-header">
+            <h2>Search</h2>
+            <span class="close-drawer hover-target">&times;</span>
+        </div>
+        <input type="text" class="search-input" placeholder="Type to search...">
+        <p style="margin-top: 20px; color: var(--text-muted);">Trending: Oak Table, Linen Sofa, Ceramic Vase</p>
+    </aside>
+
+    <header id="header">
+        <a href="#" class="logo hover-target">Aesthetic.</a>
+        
+        <ul class="nav-links">
+            <li><a href="#collection" class="hover-target">Collection</a></li>
+            <li><a href="#philosophy" class="hover-target">Philosophy</a></li>
+            <li><a href="#journal" class="hover-target">Journal</a></li>
+            <li><a href="#contact" class="hover-target">Atelier</a></li>
+        </ul>
+
+        <div class="header-icons">
+            <span class="icon-btn hover-target" onclick="toggleSearch()">&#128269;</span> <span class="icon-btn hover-target" onclick="toggleCart()">
+                &#128722; <span class="cart-count">0</span>
+            </span>
+            <div class="burger hover-target">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
 
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
@@ -164,99 +567,397 @@
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>Timeless Design</h1>
-            <a href="https://t.me/ВАШ_НИК" class="btn-tg hover-target" target="_blank">Написать в Telegram</a>
+            <span class="section-subtitle">Est. 2026 • Almaty</span>
+            <h1>Timeless Living</h1>
+            <p>Handcrafted furniture for the modern sanctuary.</p>
+            <a href="#collection" class="btn-primary hover-target">Explore Collection</a>
         </div>
     </section>
 
-    <div class="container">
-        <h2 class="section-title">Objects</h2>
-        <div class="grid">
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image1.jpg')"><img src="images/image1.jpg" alt="Muna"></div>
-                <h3>Muna</h3><span class="price">185 000 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
-            <div class="card hover-target sold-out">
-                <div class="img-container" onclick="openLightbox('images/image2.jpg')"><div class="badge">Sold Out</div><img src="images/image2.jpg" alt="Solis"></div>
-                <h3>Solis</h3><span class="price">210 000 ₸</span>
-                <a class="btn-order">Архив</a>
-            </div>
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image3.jpg')"><img src="images/image3.jpg" alt="Aura"></div>
-                <h3>Aura</h3><span class="price">65 000 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image4.jpg')"><img src="images/image4.jpg" alt="Veda"></div>
-                <h3>Veda</h3><span class="price">42 000 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image5.jpg')"><img src="images/image5.jpg" alt="Luma"></div>
-                <h3>Luma</h3><span class="price">28 500 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image6.jpg')"><img src="images/image6.jpg" alt="Nura"></div>
-                <h3>Nura</h3><span class="price">94 000 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
-            <div class="card hover-target sold-out">
-                <div class="img-container" onclick="openLightbox('images/image7.jpg')"><div class="badge">Sold Out</div><img src="images/image7.jpg" alt="Eos"></div>
-                <h3>Eos</h3><span class="price">15 000 ₸</span>
-                <a class="btn-order">Архив</a>
-            </div>
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image8.jpg')"><img src="images/image8.jpg" alt="Koto"></div>
-                <h3>Koto</h3><span class="price">37 000 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
-            <div class="card hover-target">
-                <div class="img-container" onclick="openLightbox('images/image9.jpg')"><img src="images/image9.jpg" alt="Mira"></div>
-                <h3>Mira</h3><span class="price">19 000 ₸</span>
-                <a href="https://t.me/ВАШ_НИК" class="btn-order">Заказать</a>
-            </div>
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>Sustainable Materials</span>
+            <span>•</span>
+            <span>Handcrafted in Kazakhstan</span>
+            <span>•</span>
+            <span>Timeless Design</span>
+            <span>•</span>
+            <span>Organic Textures</span>
+            <span>•</span>
+            <span>Sustainable Materials</span>
+            <span>•</span>
+            <span>Handcrafted in Kazakhstan</span>
+            <span>•</span>
+            <span>Timeless Design</span>
+            <span>•</span>
+            <span>Organic Textures</span>
         </div>
     </div>
 
-    <section class="location-section">
-        <h2 class="section-title">Atelier</h2>
-        <p>г. Алматы, пр. Абая, 150</p>
-        <div class="map-container hover-target">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.7760742116035!2d76.9038237!3d43.2351474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836ec78994784b%3A0xc3f173b063765e9!2z0L_RgNC-0YHQvy4g0JDQsdCw0Y8gMTUwLCDQkNC70LzQsNGC0YsgMDUwMDAw!5e0!3m2!1sru!2skz!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+    <section class="philosophy container" id="philosophy">
+        <div class="philo-grid">
+            <div class="philo-text">
+                <span class="section-subtitle">Our Story</span>
+                <h2>Designed for <br>Slow Living.</h2>
+                <p>We believe that your home should be a sanctuary. A place where the noise of the world fades away, replaced by the calm of natural materials and thoughtful forms.</p>
+                <p>Every piece in our collection is handcrafted by local artisans in Almaty, using ethically sourced oak, walnut, and organic linen. We don't chase trends; we create heirlooms.</p>
+                <a href="#" class="btn-primary hover-target">Read the full story</a>
+            </div>
+            <div class="philo-img hover-target">
+                <img src="images/image3.jpg" alt="Philosophy" id="parallax-img">
+            </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 60px; font-size: 0.7rem; color: #aaa; letter-spacing: 2px;">© 2026 AESTHETIC FURNITURE.</footer>
+    <section class="catalog" id="collection">
+        <div class="container">
+            <h2 class="section-title">The Collection</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active hover-target" onclick="filterSelection('all')">All</button>
+                <button class="filter-btn hover-target" onclick="filterSelection('furniture')">Furniture</button>
+                <button class="filter-btn hover-target" onclick="filterSelection('decor')">Decor</button>
+                <button class="filter-btn hover-target" onclick="filterSelection('lighting')">Lighting</button>
+            </div>
 
-    <button onclick="window.scrollTo(0,0)" id="back-to-top" class="hover-target">↑</button>
+            <div class="product-grid">
+                <div class="product-card furniture hover-target">
+                    <div class="p-image">
+                        <img src="images/image1.jpg" alt="Muna" loading="lazy">
+                        <button class="quick-add hover-target" onclick="addToCart('Muna', 185000)">Add to Cart</button>
+                    </div>
+                    <div class="p-info">
+                        <h3>Muna Table</h3>
+                        <span class="p-price">185 000 ₸</span>
+                    </div>
+                </div>
+
+                <div class="product-card decor hover-target">
+                    <div class="p-image">
+                        <img src="images/image5.jpg" alt="Luma" loading="lazy">
+                        <button class="quick-add hover-target" onclick="addToCart('Luma', 28500)">Add to Cart</button>
+                    </div>
+                    <div class="p-info">
+                        <h3>Luma Vase</h3>
+                        <span class="p-price">28 500 ₸</span>
+                    </div>
+                </div>
+
+                <div class="product-card furniture hover-target">
+                    <div class="p-image">
+                        <img src="images/image2.jpg" alt="Solis" loading="lazy">
+                        <div style="position:absolute; top:10px; left:10px; background:#fff; padding:5px 10px; font-size:0.7rem;">SOLD</div>
+                    </div>
+                    <div class="p-info">
+                        <h3>Solis Chair</h3>
+                        <span class="p-price" style="text-decoration: line-through; color:#999;">210 000 ₸</span>
+                    </div>
+                </div>
+
+                <div class="product-card lighting hover-target">
+                    <div class="p-image">
+                        <img src="images/image8.jpg" alt="Koto" loading="lazy">
+                        <button class="quick-add hover-target" onclick="addToCart('Koto', 37000)">Add to Cart</button>
+                    </div>
+                    <div class="p-info">
+                        <h3>Koto Lamp</h3>
+                        <span class="p-price">37 000 ₸</span>
+                    </div>
+                </div>
+
+                <div class="product-card furniture hover-target">
+                    <div class="p-image">
+                        <img src="images/image3.jpg" alt="Aura" loading="lazy">
+                        <button class="quick-add hover-target" onclick="addToCart('Aura', 65000)">Add to Cart</button>
+                    </div>
+                    <div class="p-info">
+                        <h3>Aura Pouf</h3>
+                        <span class="p-price">65 000 ₸</span>
+                    </div>
+                </div>
+
+                 <div class="product-card decor hover-target">
+                    <div class="p-image">
+                        <img src="images/image6.jpg" alt="Nura" loading="lazy">
+                        <button class="quick-add hover-target" onclick="addToCart('Nura', 94000)">Add to Cart</button>
+                    </div>
+                    <div class="p-info">
+                        <h3>Nura Mirror</h3>
+                        <span class="p-price">94 000 ₸</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="#" class="btn-primary hover-target">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="materials container">
+        <span class="section-subtitle">Process</span>
+        <h2 class="section-title">The Essence</h2>
+        <div class="mat-grid">
+            <div class="mat-item hover-target">
+                <span class="mat-icon">🌳</span>
+                <h4>Solid Oak</h4>
+                <p>Sourced from sustainable forests in Europe.</p>
+            </div>
+            <div class="mat-item hover-target">
+                <span class="mat-icon">🧶</span>
+                <h4>Organic Linen</h4>
+                <p>Pure, unbleached fabric for natural touch.</p>
+            </div>
+            <div class="mat-item hover-target">
+                <span class="mat-icon">🏺</span>
+                <h4>Raw Clay</h4>
+                <p>Hand-thrown ceramics with unique textures.</p>
+            </div>
+            <div class="mat-item hover-target">
+                <span class="mat-icon">✨</span>
+                <h4>Brass Details</h4>
+                <p>Aged metal that develops patina over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="journal" id="journal">
+        <div class="container">
+            <h2 class="section-title">The Journal</h2>
+            <div class="journal-grid">
+                <article class="article hover-target">
+                    <div class="art-img"><img src="images/image4.jpg" alt="Blog 1"></div>
+                    <span class="art-date">Jan 24, 2026</span>
+                    <h3 class="art-title">How to style a minimalist home</h3>
+                    <span class="read-more">Read Article</span>
+                </article>
+                <article class="article hover-target">
+                    <div class="art-img"><img src="images/image9.jpg" alt="Blog 2"></div>
+                    <span class="art-date">Jan 10, 2026</span>
+                    <h3 class="art-title">The beauty of imperfections</h3>
+                    <span class="read-more">Read Article</span>
+                </article>
+                <article class="article hover-target">
+                    <div class="art-img"><img src="images/image7.jpg" alt="Blog 3"></div>
+                    <span class="art-date">Dec 28, 2025</span>
+                    <h3 class="art-title">Care guide for solid wood</h3>
+                    <span class="read-more">Read Article</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">FAQ</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header hover-target">Do you ship internationally? <span>+</span></div>
+                <div class="accordion-body">Yes, we ship worldwide. Shipping costs are calculated at checkout based on the weight and destination.</div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header hover-target">Can I customize the furniture? <span>+</span></div>
+                <div class="accordion-body">Absolutely. Since we produce everything by hand, we can adjust dimensions and fabrics to your needs. Contact us on Telegram.</div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header hover-target">What is the return policy? <span>+</span></div>
+                <div class="accordion-body">We accept returns within 14 days of delivery, provided the item is in its original condition.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Join the Inner Circle</h2>
+            <p>Subscribe to receive updates on new drops, secret sales, and design inspiration.</p>
+            <form class="news-form">
+                <input type="email" placeholder="YOUR EMAIL ADDRESS">
+                <button type="button" class="hover-target">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="location-section" id="contact">
+        <div class="container" style="text-align:center; padding: 100px 0;">
+            <h2 class="section-title">Visit the Atelier</h2>
+            <p>Almaty, Abay Ave 150</p>
+            <div class="map-container" style="max-width: 100%; height: 500px; margin-top: 40px; filter: grayscale(1);">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.746014382583!2d76.9097!3d43.2389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzIwLjAiTiA3NsKwNTQnMzUuMCJF!5e0!3m2!1sru!2skz!4v1600000000000!5m2!1sru!2skz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Aesthetic.</h3>
+                    <p>Curated design objects for the modern home. <br>Crafted with love in Kazakhstan.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#" class="hover-target">New Arrivals</a></li>
+                        <li><a href="#" class="hover-target">Best Sellers</a></li>
+                        <li><a href="#" class="hover-target">Furniture</a></li>
+                        <li><a href="#" class="hover-target">Decor</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#" class="hover-target">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover-target">Care Guide</a></li>
+                        <li><a href="#" class="hover-target">FAQ</a></li>
+                        <li><a href="https://t.me/ВАШ_НИК" class="hover-target">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <ul>
+                        <li><a href="#" class="hover-target">Instagram</a></li>
+                        <li><a href="#" class="hover-target">Pinterest</a></li>
+                        <li><a href="#" class="hover-target">Telegram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Aesthetic Furniture. All rights reserved.</span>
+                <span>Privacy Policy / Terms of Service</span>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        // 1. PRELOADER
         window.addEventListener("load", () => {
-            const p = document.getElementById("preloader");
-            setTimeout(() => { p.classList.add("loaded"); setTimeout(() => p.style.display="none", 1000); }, 1000);
+            const preloader = document.getElementById("preloader");
+            const bar = document.querySelector(".loading-line");
+            bar.style.width = "100%";
+            setTimeout(() => {
+                preloader.style.opacity = "0";
+                setTimeout(() => preloader.style.display = "none", 500);
+            }, 800);
         });
 
-        const dot = document.querySelector('[data-cursor-dot]');
-        const out = document.querySelector('[data-cursor-outline]');
+        // 2. CUSTOM CURSOR
+        const dot = document.querySelector('.cursor-dot');
+        const circle = document.querySelector('.cursor-circle');
+        const targets = document.querySelectorAll('.hover-target');
+
         window.addEventListener('mousemove', (e) => {
-            dot.style.left = out.style.left = `${e.clientX}px`;
-            dot.style.top = out.style.top = `${e.clientY}px`;
-            out.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+            dot.style.left = `${e.clientX}px`;
+            dot.style.top = `${e.clientY}px`;
+            circle.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
         });
 
-        document.querySelectorAll('.hover-target, a, button').forEach(el => {
+        targets.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovered'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovered'));
         });
 
-        const lb = document.getElementById('lightbox'), lbi = document.getElementById('lightbox-img');
-        function openLightbox(s) { lbi.src = s; lb.classList.add('active'); }
-        lb.onclick = (e) => { if(e.target !== lbi) lb.classList.remove('active'); };
+        // 3. HEADER SCROLL EFFECT
+        const header = document.getElementById("header");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) header.classList.add("scrolled");
+            else header.classList.remove("scrolled");
+        });
 
-        let b = document.getElementById("back-to-top");
-        window.onscroll = () => { b.style.display = (window.scrollY > 400) ? "block" : "none"; };
+        // 4. DRAWERS (CART & SEARCH)
+        const overlay = document.getElementById("overlay");
+        const cartDrawer = document.getElementById("cart-drawer");
+        const searchDrawer = document.getElementById("search-drawer");
+        const closeBtns = document.querySelectorAll(".close-drawer");
+
+        function toggleCart() {
+            cartDrawer.classList.toggle("open");
+            overlay.classList.toggle("active");
+            searchDrawer.classList.remove("open");
+        }
+
+        function toggleSearch() {
+            searchDrawer.classList.toggle("open");
+            overlay.classList.toggle("active");
+            cartDrawer.classList.remove("open");
+        }
+
+        function closeAll() {
+            cartDrawer.classList.remove("open");
+            searchDrawer.classList.remove("open");
+            overlay.classList.remove("active");
+        }
+
+        overlay.addEventListener("click", closeAll);
+        closeBtns.forEach(btn => btn.addEventListener("click", closeAll));
+
+        // 5. FILTERING
+        function filterSelection(category) {
+            const items = document.getElementsByClassName("product-card");
+            const btns = document.getElementsByClassName("filter-btn");
+            
+            // Manage active class on buttons
+            for (let btn of btns) {
+                btn.classList.remove("active");
+                if(btn.textContent.toLowerCase() === category || (category === 'all' && btn.textContent === 'All')) {
+                    btn.classList.add("active");
+                }
+            }
+
+            // Show/Hide items
+            for (let i = 0; i < items.length; i++) {
+                if (category === "all") {
+                    items[i].classList.remove("hidden");
+                } else {
+                    if (items[i].classList.contains(category)) {
+                        items[i].classList.remove("hidden");
+                    } else {
+                        items[i].classList.add("hidden");
+                    }
+                }
+            }
+        }
+
+        // 6. ADD TO CART (MOCKUP)
+        let cartCount = 0;
+        function addToCart(name, price) {
+            cartCount++;
+            document.querySelector(".cart-count").innerText = cartCount;
+            // Open cart to show user
+            const body = document.querySelector(".cart-body");
+            const emptyMsg = document.querySelector(".empty-state");
+            if(emptyMsg) emptyMsg.style.display = 'none';
+            
+            const itemHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                    <div><strong>${name}</strong><br><span style="font-size:0.8rem; color:#666;">1 x ${price} ₸</span></div>
+                    <span style="cursor:pointer;" onclick="this.parentElement.remove()">×</span>
+                </div>`;
+            body.insertAdjacentHTML('beforeend', itemHTML);
+            
+            toggleCart();
+        }
+
+        // 7. ACCORDION
+        const acc = document.getElementsByClassName("accordion-header");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.parentElement.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                const span = this.querySelector("span");
+                span.innerText = this.parentElement.classList.contains("active") ? "-" : "+";
+            });
+        }
+
+        // 8. PARALLAX IMAGE
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const parallaxImg = document.getElementById('parallax-img');
+            const limit = parallaxImg.parentElement.offsetTop + parallaxImg.parentElement.offsetHeight;
+            
+            if(scrolled > parallaxImg.parentElement.offsetTop - window.innerHeight && scrolled < limit) {
+                parallaxImg.style.transform = `translateY(${-(scrolled * 0.1)}px)`;
+            }
+        });
+
     </script>
 </body>
 </html>
